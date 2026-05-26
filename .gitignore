@@ -1,7 +1,46 @@
+# Dependencies
 node_modules/
+
+# Build output
 dist/
 *.js.map
-.DS_Store
-*.log
+*.d.ts.map
+
+# Environment & secrets
 .env
 .env.*
+.env.local
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+pnpm-debug.log*
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test & coverage
+coverage/
+.nyc_output/
+
+# Temp files
+*.tmp
+*.temp
+
+# pnpm
+.pnpm-store/
+
+# Claude Code session data
+.claude/session/
+
+# Generated knowledge graphs
+.understand-anything/
