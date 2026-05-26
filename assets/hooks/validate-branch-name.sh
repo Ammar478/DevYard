@@ -26,6 +26,12 @@ if [[ -z "${BRANCH}" ]]; then
   exit 0
 fi
 
+# Allow protected base branches
+if [[ "${BRANCH}" =~ ^(main|master|develop|dev)$ ]]; then
+  _audit_log_append "${HOOK_NAME}" "allowed" "branch:${BRANCH}"
+  exit 0
+fi
+
 VALID_PATTERN='^(feat|fix|refactor|chore|test|docs|perf|spike)/[A-Z]+-[0-9]+-[a-z0-9-]+$'
 
 if ! echo "${BRANCH}" | grep -qE "${VALID_PATTERN}"; then
