@@ -7,22 +7,32 @@ _extract_push_target() {
   local args
   args=$(echo "${cmd}" | sed -E 's/^git[[:space:]]+push[[:space:]]*//')
 
-  # Remove flags like --force, --force-with-lease, --no-verify, etc.
+  # Remove ALL flag tokens (both -f and --force style)
   local positionals=()
   for token in ${args}; do
-    if [[ "${token}" != --* ]]; then
+    if [[ "${token}" != -* ]]; then
       positionals+=("${token}")
     fi
   done
 
+  _resolve_head() {
+    git rev-parse --abbrev-ref HEAD 2>/dev/null || git branch --show-current 2>/dev/null || echo ""
+  }
+
   # positionals[0] = remote, positionals[1] = branch (if present)
   if [[ ${#positionals[@]} -ge 2 ]]; then
-    echo "${positionals[1]}"
+    local target="${positionals[1]}"
+    # Resolve symbolic HEAD to the actual branch name
+    if [[ "${target}" == "HEAD" ]]; then
+      _resolve_head
+    else
+      echo "${target}"
+    fi
   elif [[ ${#positionals[@]} -eq 1 ]]; then
     # Only remote specified — derive branch from HEAD
-    git branch --show-current 2>/dev/null || echo ""
+    _resolve_head
   else
     # Bare "git push" — derive branch from HEAD
-    git branch --show-current 2>/dev/null || echo ""
+    _resolve_head
   fi
 }

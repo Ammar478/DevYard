@@ -27,13 +27,20 @@ if [[ "${SKIP_GATE:-}" == "1" ]]; then
   exit 0
 fi
 
-# Only gate on pushes to origin
-if echo "${COMMAND}" | grep -qE 'git[[:space:]]+push[[:space:]]+[^o][^r][^i]'; then
-  REMOTE=$(echo "${COMMAND}" | grep -oP 'git push \K[^[:space:]]+' | head -1 || echo "origin")
-  if [[ -n "${REMOTE}" && "${REMOTE}" != "origin" ]]; then
-    _audit_log_append "${HOOK_NAME}" "allowed" "non-origin push"
-    exit 0
+# Only gate on pushes to origin — extract remote by skipping all flag tokens
+_PUSH_REMOTE="origin"
+_PUSH_ARGS=$(echo "${COMMAND}" | sed -E 's/.*git push[[:space:]]*//')
+for _token in ${_PUSH_ARGS}; do
+  if [[ "${_token}" != -* ]]; then
+    _PUSH_REMOTE="${_token}"
+    break
   fi
+done
+unset _PUSH_ARGS _token
+
+if [[ "${_PUSH_REMOTE}" != "origin" ]]; then
+  _audit_log_append "${HOOK_NAME}" "allowed" "non-origin push:${_PUSH_REMOTE}"
+  exit 0
 fi
 
 REPO_ROOT=$(_get_active_repo_root)

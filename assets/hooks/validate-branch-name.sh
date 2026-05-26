@@ -3,6 +3,7 @@ set -euo pipefail
 
 HOOK_NAME="validate-branch-name"
 source "$(dirname "${BASH_SOURCE[0]}")/_lib-audit-log.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/_lib-multi-repo-trace.sh"
 
 INPUT=$(cat)
 
@@ -19,7 +20,8 @@ if ! echo "${COMMAND}" | grep -qE '(^|[[:space:]])git[[:space:]]+push([[:space:]
   exit 0
 fi
 
-BRANCH=$(git branch --show-current 2>/dev/null || echo "")
+REPO_ROOT=$(_get_active_repo_root)
+BRANCH=$(git -C "${REPO_ROOT}" branch --show-current 2>/dev/null || echo "")
 
 if [[ -z "${BRANCH}" ]]; then
   _audit_log_append "${HOOK_NAME}" "allowed" "no-branch"
