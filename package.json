@@ -1,0 +1,42 @@
+{
+  "name": "devyard",
+  "version": "1.0.0",
+  "description": "Personal engineering OS — TUI control plane for the full SDLC",
+  "type": "module",
+  "bin": {
+    "devyard": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsx src/cli.ts",
+    "lint": "biome check --write .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "link": "pnpm link --global"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "ajv": "^8.17.1",
+    "commander": "^12.1.0",
+    "fuse.js": "^7.0.0",
+    "gray-matter": "^4.0.3",
+    "ink": "^5.0.1",
+    "p-limit": "^6.1.0",
+    "react": "^18.3.1",
+    "yaml": "^2.5.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "@types/react": "^18.3.3",
+    "@biomejs/biome": "^1.8.3",
+    "fast-check": "^3.21.0",
+    "tsup": "^8.2.4",
+    "tsx": "^4.16.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=20.11.0"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "devyard://schemas/handover",
+  "title": "HandoverFrontmatter",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": ["handover"]
+    },
+    "project": {
+      "type": "string"
+    },
+    "date": {
+      "type": "string"
+    },
+    "summary_of": {
+      "type": "string"
+    },
+    "next_owner": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "state_snapshot": {
+      "type": "object",
+      "properties": {
+        "last_branch": {
+          "anyOf": [{ "type": "string" }, { "type": "null" }]
+        },
+        "last_ticket": {
+          "anyOf": [{ "type": "string" }, { "type": "null" }]
+        },
+        "open_decisions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "open_tasks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": ["last_branch", "last_ticket", "open_decisions", "open_tasks"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["type", "project", "date", "summary_of", "next_owner", "state_snapshot"],
+  "additionalProperties": false
+}

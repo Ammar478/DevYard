@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "devyard://schemas/agdr",
+  "title": "AgdrFrontmatter",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["agdr"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["proposed", "accepted", "deprecated", "superseded"]
+    },
+    "date": {
+      "type": "string"
+    },
+    "supersedes": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "superseded_by": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "context_tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "y_statement": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "type",
+    "status",
+    "date",
+    "supersedes",
+    "superseded_by",
+    "context_tags",
+    "y_statement"
+  ],
+  "additionalProperties": false
+}

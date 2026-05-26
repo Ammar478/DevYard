@@ -1,0 +1,46 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "devyard://schemas/investigation",
+  "title": "InvestigationFrontmatter",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["investigation"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "follow-ups-filed", "closed"]
+    },
+    "opened": {
+      "type": "string"
+    },
+    "severity": {
+      "type": "string",
+      "enum": ["CRITICAL", "HIGH", "MEDIUM", "LOW"]
+    },
+    "hypothesis_count": {
+      "type": "integer"
+    },
+    "evidence_count": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "type",
+    "status",
+    "opened",
+    "severity",
+    "hypothesis_count",
+    "evidence_count"
+  ],
+  "additionalProperties": false
+}

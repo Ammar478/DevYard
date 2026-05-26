@@ -1,0 +1,38 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "devyard://schemas/idea",
+  "title": "IdeaFrontmatter",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["idea"]
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "created": {
+      "type": "string"
+    },
+    "verdict": {
+      "anyOf": [{ "type": "string", "enum": ["GREEN", "YELLOW", "RED"] }, { "type": "null" }]
+    },
+    "promoted_to": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "archived": {
+      "type": "boolean"
+    }
+  },
+  "required": ["id", "title", "type", "tags", "created", "verdict", "promoted_to", "archived"],
+  "additionalProperties": false
+}

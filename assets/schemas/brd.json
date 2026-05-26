@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "devyard://schemas/brd",
+  "title": "BrdFrontmatter",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["brd"]
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "approved", "done"]
+    },
+    "linked_tasks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "linked_mr": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "linked_idea": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "created": {
+      "type": "string"
+    },
+    "approved_at": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    },
+    "author": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "type",
+    "version",
+    "status",
+    "linked_tasks",
+    "linked_mr",
+    "linked_idea",
+    "created",
+    "approved_at",
+    "author"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "devyard://schemas/spike-memo",
+  "title": "SpikeMemoFrontmatter",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["spike-memo"]
+    },
+    "disposition": {
+      "type": "string",
+      "enum": ["PROMOTE", "DISCARD"]
+    },
+    "hypothesis": {
+      "type": "string"
+    },
+    "budget_hours": {
+      "type": "integer"
+    },
+    "actual_hours": {
+      "type": "integer"
+    },
+    "kill_criteria_met": {
+      "type": "boolean"
+    },
+    "closed": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "type",
+    "disposition",
+    "hypothesis",
+    "budget_hours",
+    "actual_hours",
+    "kill_criteria_met",
+    "closed"
+  ],
+  "additionalProperties": false
+}

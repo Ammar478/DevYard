@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "devyard://schemas/design",
+  "title": "DesignFrontmatter",
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["design"]
+    },
+    "version": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "approved", "done"]
+    },
+    "linked_brd": {
+      "type": "string"
+    },
+    "created": {
+      "type": "string"
+    },
+    "approved_at": {
+      "anyOf": [{ "type": "string" }, { "type": "null" }]
+    }
+  },
+  "required": ["title", "type", "version", "status", "linked_brd", "created", "approved_at"],
+  "additionalProperties": false
+}
